@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -11,13 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pdp_QUAN_TRI', function (Blueprint $table) {
+        Schema::create('PDP_LOAISANPHAM', function (Blueprint $table) {
             $table->id();
-            
-                $table->string('pdptaikhoan',255)->unque();
-                $table->string('pdpMatKhau',255);
-                $table->tinyInteger('pdpTrangThai');
-                $table->timestamps();
+            $table->string('pdpMaLoai',255)->unique();
+            $table->string('pdpTenLoai',255);
+            $table->tinyInteger('pdpTrangThai');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pdp_QUAN_TRI');
+        Schema::dropIfExists('PDP_LOAISANPHAM');
     }
 };

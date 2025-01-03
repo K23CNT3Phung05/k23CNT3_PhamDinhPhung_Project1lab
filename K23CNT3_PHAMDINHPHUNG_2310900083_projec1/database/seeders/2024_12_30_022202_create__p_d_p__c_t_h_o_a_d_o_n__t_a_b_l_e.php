@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pdp_LOAI_SAN_PHAM', function (Blueprint $table) {
+        Schema::create('pdp_CTHOADON', function (Blueprint $table) {
             $table->id();
-            $table->string ('pdpMaloai')->unique();
-            $table->string('pdpTenloai',255);
+            $table->bigInteger('pdpHoaDonID')->references('id')->on('pdp_HOADON');
+            $table->bigInteger('pdpSanPhamID')->references('id')->on('pdp_SANPHAM');
+            $table->integer('pdpSoLuongMua');
+            $table->float('pdpDonGiaMua');
+            $table->double('pdpThanhTien');
             $table->tinyInteger('pdpTrangThai');
             $table->timestamps();
         });
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pdp_LOAI_SAN_PHAM');
+        Schema::dropIfExists('pdp_CTHOADON');
     }
 };

@@ -1,0 +1,70 @@
+CREATE DATABASE ShoppingCart
+use ShoppingCart 
+GO
+CREATE TABLE  pdp_QUAN_TRI(			
+  pdp_ID INT PRIMARY KEY IDENTITY,
+  pdp_TaiKhoan nVARCHAR(255) UNIQUE ,
+  pdp_MatKhau nVARCHAR(255)  ,
+   pdp_TrangThai tinyint  
+);
+go
+
+CREATE TABLE  pdp_LOAI_SAN_PHAM(
+  pdp_ID INT PRIMARY KEY IDENTITY,
+    pdp_MaLoai VARCHAR(255) UNIQUE ,
+	  pdp_TenLoai VARCHAR(255)  ,
+	    pdp_TrangThai tinyint  
+);
+go
+
+CREATE TABLE  pdp_SAN_PHAM(
+  pdp_ID INT PRIMARY KEY IDENTITY,
+  pdp_MaSanPham VARCHAR(255) UNIQUE ,
+  pdp_TenSanPham VARCHAR(255)  ,
+  pdp_HinhAnh VARCHAR(255)  ,
+  pdp_SoLuong int  ,
+  pdp_DonGia float  ,
+  pdp_MaLoai int REFERENCES pdp_LOAI_SAN_PHAM(pdp_ID) ,
+  pdp_TrangThai tinyint  
+)
+go
+
+CREATE TABLE  pdp_KHACH_HANG(
+  pdp_ID INT PRIMARY KEY IDENTITY,
+  pdp_MaKhachHang VARCHAR(255) UNIQUE ,
+  pdp_HoTenKhachHang VARCHAR(255)  ,
+  pdp_Email VARCHAR(255) UNIQUE ,
+  pdp_MatKhau VARCHAR(255)  ,
+  pdp_DienThoai VARCHAR(10) UNIQUE ,
+  pdp_DiaChi VARCHAR(255)  ,
+  pdp_NgayDangKy datetime  ,
+  pdp_TrangThai tinyint  ,
+
+  )
+  go
+
+  CREATE TABLE  pdp_HOA_DON(
+  pdp_ID INT PRIMARY KEY IDENTITY,
+  pdp_MaHoaDon VARCHAR(255) UNIQUE ,
+  pdp_MaKhachHang INT REFERENCES pdp_KHACH_HANG(pdp_ID) ,
+  pdp_NgayHoaDon datetime  ,
+  pdp_NgayNhan datetime  ,
+  pdp_HoTenKhachHang VARCHAR(255)  ,
+  pdp_Email VARCHAR(255)  ,
+  pdp_DienThoai VARCHAR(10)  ,
+  pdp_DiaChi VARCHAR(255)  ,
+  pdp_TongTriGia float  ,
+  pdp_TrangThai tinyint  ,
+)
+go
+
+CREATE TABLE  pdp_CT_HOA_DON(
+  pdp_ID INT PRIMARY KEY IDENTITY,
+  pdp_HoaDonID INT REFERENCES pdp_HOA_DON(pdp_ID) ,
+  pdp_SanPhamID INT REFERENCES pdp_SAN_PHAM(pdp_ID) ,
+  pdp_SoLuongMua INT  ,
+  pdp_DonGiaMua float  ,
+  pdp_ThanhTien float  ,
+  pdp_TrangThai tinyint  ,
+) 
+go

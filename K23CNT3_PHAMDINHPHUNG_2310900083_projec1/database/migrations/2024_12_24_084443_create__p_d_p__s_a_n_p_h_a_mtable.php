@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -11,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pdp_SAN_PHAM', function (Blueprint $table) {
+        Schema::create('PDP_SANPHAM', function (Blueprint $table) {
             $table->id();
         
             $table->string('pdpMaSanPham',255)->unique();
@@ -19,8 +20,8 @@ return new class extends Migration
             $table->string('pdpHinhAnh',255);
             $table->integer('pdpSoLuong',);
             $table->float('pdpDonGia');
-            $table->bigintegre('pdpMaLoai')->references('id')->on('pdp_LOAI-SAN_PHAM');
-            $table->bigintegre('PDPTrangthai');
+            $table->bigInteger('pdpMaLoai')->references('id')->on('PDP_LOAISANPHAM');
+            $table->bigInteger('pdpTrangthai');
             $table->timestamps();
 
         });
@@ -31,6 +32,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pdp_SAN_PHAM');
+        Schema::dropIfExists('PDP_SANPHAM');
     }
 };
+
